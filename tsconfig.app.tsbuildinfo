@@ -1,0 +1,1 @@
+{"root":["./src/actionbutton.tsx","./src/alertdialog.tsx","./src/app.tsx","./src/formdialog.tsx","./src/qr.tsx","./src/sidebar.tsx","./src/todoitem.tsx","./src/toolbar.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/lib/istodos.ts","./src/types/filter.d.ts","./src/types/todo.d.ts","./node_modules/vite-plugin-pwa/client.d.ts"],"version":"5.7.3"}
