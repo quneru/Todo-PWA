@@ -14,6 +14,7 @@ import { FormDialog } from './FormDialog';
 import { AlertDialog } from './AlertDialog';
 import { ActionButton } from './ActionButton';
 import { isTodos } from './lib/isTodos';
+import { useToggle } from './useToggle';
 
 
 
@@ -37,27 +38,27 @@ export const App = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState<Filter>('all');
 
-  const [qrOpen, setQrOpen] = useState(false);
-  const [alertOpen, setAlertOpen] = useState(false);
+  const [qrOpen, setQrOpen] = useToggle(false);
+  const [alertOpen, setAlertOpen] = useToggle(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useToggle(false);
 
-  const handleToggleQR = () => {
-    setQrOpen((qrOpen) => !qrOpen);
-  };
+  // const handleToggleQR = () => {
+  //   setQrOpen((qrOpen) => !qrOpen);
+  // };
 
-  const handleToggleDrawer = () => {
-    setDrawerOpen((drawerOpen) => !drawerOpen);
-  };
+  // const handleToggleDrawer = () => {
+  //   setDrawerOpen((drawerOpen) => !drawerOpen);
+  // };
 
   const handleToggleDialog = () => {
     setDialogOpen((dialogOpen) => !dialogOpen);
     setText('');
   };
 
-  const handleToggleAlert = () => {
-    setAlertOpen((alertOpen) => !alertOpen);
-  };
+  // const handleToggleAlert = () => {
+  //   setAlertOpen((alertOpen) => !alertOpen);
+  // };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -122,14 +123,14 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles styles={{ body: { margin: 0, padding: 0 } }} />
-      <ToolBar filter={filter} onToggleDrawer={handleToggleDrawer} />
+      <ToolBar filter={filter} onToggleDrawer={setDrawerOpen} />
       <SideBar
         drawerOpen={drawerOpen}
         onFilter={handleFilter}
-        onToggleQR={handleToggleQR}
-        onToggleDrawer={handleToggleDrawer}
+        onToggleQR={setQrOpen}
+        onToggleDrawer={setDrawerOpen}
       />
-      <QR open={qrOpen} onClose={handleToggleQR} />
+      <QR open={qrOpen} onClose={setQrOpen} />
       <FormDialog
         text={text}
         dialogOpen={dialogOpen}
@@ -140,7 +141,7 @@ export const App = () => {
       <AlertDialog
         alertOpen={alertOpen}
         onEmpty={handleEmpty}
-        onToggleAlert={handleToggleAlert}
+        onToggleAlert={setAlertOpen}
       />
       <TodoItem todos={todos} filter={filter} onTodo={handleTodo} />
       <ActionButton
@@ -148,7 +149,7 @@ export const App = () => {
         filter={filter}
         alertOpen={alertOpen}
         dialogOpen={dialogOpen}
-        onToggleAlert={handleToggleAlert}
+        onToggleAlert={setAlertOpen}
         onToggleDialog={handleToggleDialog}
       />
     </ThemeProvider>
